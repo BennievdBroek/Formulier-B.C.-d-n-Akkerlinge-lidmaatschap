@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Aanmelding B.C. d’n Akkerlinge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-size: 18px;
+      line-height: 1.6;
+    {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #c1e8c2, #d0e7ff);
+      margin: 0;
+      padding: 0;
+    }}
+
+    .container {
+      padding: 40px;
+      margin-top: 40px;
+    {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }}
+
+    .logo {{
+      text-align: center;
+      margin-bottom: 20px;
+    }}
+
+    .logo img {{
+      max-width: 150px;
+    }}
+
+    h1 {
+      margin-bottom: 30px;
+    {
+      text-align: center;
+      color: #005c2a;
+    }}
+
+    .form-step {{
+      display: none;
+    }}
+
+    .form-step.active {{
+      display: block;
+    }}
+
+    label {
+      margin-top: 25px;
+      font-size: 1.05rem;
+    {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }}
+
+    input, textarea, button {
+      padding: 14px;
+      font-size: 1.1rem;
+    {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }}
+
+    button {{
+      background-color: #005c2a;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+      border-radius: 5px;
+    }}
+
+    button:hover {{
+      background-color: #003e1c;
+    }}
+
+    .nav-buttons {{
+      display: flex;
+      justify-content: space-between;
+    }}
+
+    .mededeling {{
+      margin-top: 30px;
+      font-size: 0.95rem;
+      color: #333;
+      background: #fff8dc;
+      border-left: 4px solid #daa520;
+      padding: 15px;
+      border-radius: 5px;
+    }}
+
+    .gezinslid {{
+      background-color: #e6f7ff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }}
+  </style>
+</head>
+<body>
+  <script>
+    const wachtwoord = prompt("Voer het wachtwoord in:");
+    if (wachtwoord !== "akkerlinge2025") {
+      alert("Verkeerd wachtwoord. Toegang geweigerd.");
+      document.body.innerHTML = "";
+    }
+  </script>
+
+  <div class="container">
+    <div class="logo">
+      <img src="logo.png" alt="Logo B.C. d’n Akkerlinge">
+    </div>
+    <h1>Aanmeldformulier</h1>
+
+    <form id="wizardForm" action="https://formspree.io/f/xldbypvl" method="POST">
+      <input type="hidden" name="_autoresponse" value="Bedankt voor je aanmelding bij B.C. d’n Akkerlinge! We hebben je gegevens goed ontvangen. Hieronder vind je een kopie van je aanmelding.">
+      <input type="hidden" name="_template" value="table">
+
+      <div class="form-step active">
+        <label>Volledige naam</label>
+        <input type="text" name="naam" required>
+        <label>Geboortedatum</label>
+        <input type="date" name="geboortedatum" required>
+        <label>Adres</label>
+        <input type="text" name="adres" required>
+        <label>Telefoonnummer</label>
+        <input type="tel" name="telefoon" required>
+        <label>E-mailadres</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <div class="form-step">
+        <label for="aantalGezinsleden">Aantal extra gezinsleden</label>
+        <input type="number" id="aantalGezinsleden" name="aantalGezinsleden" min="0" max="10" value="0">
+        <div id="gezinsleden-container"></div>
+      </div>
+
+      <div class="form-step">
+        <label>
+          <input type="checkbox" name="akkoord" required>
+          Ik ga akkoord met de contributieregels
+        </label>
+        <p>
+          Aan de hand van de opgegeven geboortedatums wordt bepaald welk persoon contributie dient te betalen van €25,- per jaar.
+          Of er contributie betaald moet worden is afhankelijk van de leeftijd op 1 oktober van dat jaar. 
+          Als het lid dan 16 jaar of ouder is, geldt de contributieplicht.
+        </p>
+      </div>
+
+      <div class="form-step">
+        <p>Klik op verzenden om je aanmelding door te geven. Je ontvangt een bevestiging per e-mail.</p>
+        <button type="submit">Aanmelden</button>
+      </div>
+
+      <div class="nav-buttons">
+        <button type="button" onclick="prevStep()">Vorige</button>
+        <button type="button" onclick="nextStep()">Volgende</button>
+      </div>
+    </form>
+
+    <div class="mededeling">
+      <strong>Let op:</strong> Dit formulier is niet bindend en geeft geen verplichtingen.
+      Wanneer je ooit besluit je lidmaatschap stop te zetten, geef dit dan duidelijk aan binnen de groep.
+      Zo houden we de ledenlijsten en WhatsAppgroepen netjes bij.
+    </div>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.form-step');
+    let currentStep = 0;
+    function showStep(index) {{
+      steps.forEach((step, i) => {{
+        step.classList.toggle('active', i === index);
+      }});
+    }}
+    function nextStep() {{
+      if (currentStep < steps.length - 1) {{
+        currentStep++;
+        showStep(currentStep);
+      }}
+    }}
+    function prevStep() {{
+      if (currentStep > 0) {{
+        currentStep--;
+        showStep(currentStep);
+      }}
+    }}
+    document.getElementById('aantalGezinsleden').addEventListener('input', function() {{
+      const container = document.getElementById('gezinsleden-container');
+      container.innerHTML = '';
+      const aantal = parseInt(this.value);
+      for (let i = 1; i <= aantal; i++) {{
+        const div = document.createElement('div');
+        div.className = 'gezinslid';
+        div.innerHTML = `
+          <h3>Gezinslid ${i}</h3>
+          <label>Geboortedatum</label>
+          <input type="date" name="gezinslid_${{i}}_geboortedatum" required>
+          <label>Telefoonnummer (optioneel)</label>
+          <input type="tel" name="gezinslid_${{i}}_telefoon">
+          <label>E-mailadres (optioneel)</label>
+          <input type="email" name="gezinslid_${{i}}_email">
+        `;
+        container.appendChild(div);
+      }}
+    }});
+  </script>
+</body>
+</html>
