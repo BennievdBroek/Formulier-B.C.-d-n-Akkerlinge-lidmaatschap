@@ -6,89 +6,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
+      font-family: Arial, sans-serif;
       font-size: 18px;
       line-height: 1.6;
-    {
-      font-family: Arial, sans-serif;
       background: linear-gradient(to bottom right, #c1e8c2, #d0e7ff);
       margin: 0;
       padding: 0;
-    }}
-
+    }
     .container {
-      padding: 40px;
-      margin-top: 40px;
-    {
       max-width: 700px;
       margin: auto;
       background: white;
-      padding: 20px;
+      padding: 40px;
+      margin-top: 40px;
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }}
-
-    .logo {{
+    }
+    .logo {
       text-align: center;
       margin-bottom: 20px;
-    }}
-
-    .logo img {{
+    }
+    .logo img {
       max-width: 150px;
-    }}
-
+    }
     h1 {
-      margin-bottom: 30px;
-    {
       text-align: center;
       color: #005c2a;
-    }}
-
-    .form-step {{
-      display: none;
-    }}
-
-    .form-step.active {{
-      display: block;
-    }}
-
+      margin-bottom: 30px;
+    }
     label {
-      margin-top: 25px;
-      font-size: 1.05rem;
-    {
       display: block;
-      margin-top: 15px;
+      margin-top: 25px;
       font-weight: bold;
-    }}
-
+      font-size: 1.05rem;
+    }
     input, textarea, button {
-      padding: 14px;
-      font-size: 1.1rem;
-    {
       width: 100%;
-      padding: 10px;
+      padding: 14px;
       margin-top: 5px;
+      font-size: 1.1rem;
       box-sizing: border-box;
-    }}
-
-    button {{
+    }
+    button {
       background-color: #005c2a;
       color: white;
       border: none;
       cursor: pointer;
       margin-top: 20px;
       border-radius: 5px;
-    }}
-
-    button:hover {{
+    }
+    button:hover {
       background-color: #003e1c;
-    }}
-
-    .nav-buttons {{
-      display: flex;
-      justify-content: space-between;
-    }}
-
-    .mededeling {{
+    }
+    .mededeling {
       margin-top: 30px;
       font-size: 0.95rem;
       color: #333;
@@ -96,14 +66,13 @@
       border-left: 4px solid #daa520;
       padding: 15px;
       border-radius: 5px;
-    }}
-
-    .gezinslid {{
+    }
+    .gezinslid {
       background-color: #e6f7ff;
       padding: 15px;
       border-radius: 10px;
       margin-top: 15px;
-    }}
+    }
   </style>
 </head>
 <body>
@@ -121,50 +90,46 @@
     </div>
     <h1>Aanmeldformulier</h1>
 
-    <form id="wizardForm" action="https://formspree.io/f/xldbypvl" method="POST">
+    <form action="https://formspree.io/f/xldbypvl" method="POST">
       <input type="hidden" name="_autoresponse" value="Bedankt voor je aanmelding bij B.C. d’n Akkerlinge! We hebben je gegevens goed ontvangen. Hieronder vind je een kopie van je aanmelding.">
       <input type="hidden" name="_template" value="table">
 
-      <div class="form-step active">
-        <label>Volledige naam</label>
-        <input type="text" name="naam" required>
-        <label>Geboortedatum</label>
-        <input type="date" name="geboortedatum" required>
-        <label>Adres</label>
-        <input type="text" name="adres" required>
-        <label>Telefoonnummer</label>
-        <input type="tel" name="telefoon" required>
-        <label>E-mailadres</label>
-        <input type="email" name="email" required>
-      </div>
+      <label>Volledige naam</label>
+      <input type="text" name="naam" required>
 
-      <div class="form-step">
-        <label for="aantalGezinsleden">Aantal extra gezinsleden</label>
-        <input type="number" id="aantalGezinsleden" name="aantalGezinsleden" min="0" max="10" value="0">
-        <div id="gezinsleden-container"></div>
-      </div>
+      <label>Geboortedatum</label>
+      <input type="date" name="geboortedatum" required>
 
-      <div class="form-step">
-        <label>
-          <input type="checkbox" name="akkoord" required>
-          Ik ga akkoord met de contributieregels
-        </label>
-        <p>
-          Aan de hand van de opgegeven geboortedatums wordt bepaald welk persoon contributie dient te betalen van €25,- per jaar.
-          Of er contributie betaald moet worden is afhankelijk van de leeftijd op 1 oktober van dat jaar. 
-          Als het lid dan 16 jaar of ouder is, geldt de contributieplicht.
-        </p>
-      </div>
+      <label>Straat + huisnummer</label>
+      <input type="text" name="adres" required>
 
-      <div class="form-step">
-        <p>Klik op verzenden om je aanmelding door te geven. Je ontvangt een bevestiging per e-mail.</p>
-        <button type="submit">Aanmelden</button>
-      </div>
+      <label>Postcode</label>
+      <input type="text" name="postcode" required>
 
-      <div class="nav-buttons">
-        <button type="button" onclick="prevStep()">Vorige</button>
-        <button type="button" onclick="nextStep()">Volgende</button>
-      </div>
+      <label>Woonplaats</label>
+      <input type="text" name="woonplaats" required>
+
+      <label>Telefoonnummer</label>
+      <input type="tel" name="telefoon" required>
+
+      <label>E-mailadres</label>
+      <input type="email" name="email" required>
+
+      <label for="aantalGezinsleden">Aantal extra gezinsleden</label>
+      <input type="number" id="aantalGezinsleden" name="aantalGezinsleden" min="0" max="10" value="0">
+      <div id="gezinsleden-container"></div>
+
+      <label>
+        <input type="checkbox" name="akkoord" required>
+        Ik ga akkoord met de contributieregels
+      </label>
+      <p>
+        Aan de hand van de opgegeven geboortedatum wordt bepaald of de aangemelde persoon contributie dient te betalen van €25,- per jaar.
+        Of er contributie betaald moet worden is afhankelijk van de leeftijd op 1 oktober van het nieuwe startende bouwjaar. 
+        Als het lid dan 16 jaar of ouder is, geldt de contributieplicht.
+      </p>
+
+      <button type="submit">Aanmelden</button>
     </form>
 
     <div class="mededeling">
@@ -175,44 +140,25 @@
   </div>
 
   <script>
-    const steps = document.querySelectorAll('.form-step');
-    let currentStep = 0;
-    function showStep(index) {{
-      steps.forEach((step, i) => {{
-        step.classList.toggle('active', i === index);
-      }});
-    }}
-    function nextStep() {{
-      if (currentStep < steps.length - 1) {{
-        currentStep++;
-        showStep(currentStep);
-      }}
-    }}
-    function prevStep() {{
-      if (currentStep > 0) {{
-        currentStep--;
-        showStep(currentStep);
-      }}
-    }}
-    document.getElementById('aantalGezinsleden').addEventListener('input', function() {{
+    document.getElementById('aantalGezinsleden').addEventListener('input', function() {
       const container = document.getElementById('gezinsleden-container');
       container.innerHTML = '';
       const aantal = parseInt(this.value);
-      for (let i = 1; i <= aantal; i++) {{
+      for (let i = 1; i <= aantal; i++) {
         const div = document.createElement('div');
         div.className = 'gezinslid';
         div.innerHTML = `
           <h3>Gezinslid ${i}</h3>
           <label>Geboortedatum</label>
-          <input type="date" name="gezinslid_${{i}}_geboortedatum" required>
+          <input type="date" name="gezinslid_${i}_geboortedatum" required>
           <label>Telefoonnummer (optioneel)</label>
-          <input type="tel" name="gezinslid_${{i}}_telefoon">
+          <input type="tel" name="gezinslid_${i}_telefoon">
           <label>E-mailadres (optioneel)</label>
-          <input type="email" name="gezinslid_${{i}}_email">
+          <input type="email" name="gezinslid_${i}_email">
         `;
         container.appendChild(div);
-      }}
-    }});
+      }
+    });
   </script>
 </body>
 </html>
