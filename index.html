@@ -124,8 +124,8 @@
         Ik ga akkoord met de contributieregels
       </label>
       <p>
-        Aan de hand van de opgegeven geboortedatum wordt bepaald of de aangemelde persoon contributie dient te betalen van €25,- per jaar.
-        Of er contributie betaald moet worden is afhankelijk van de leeftijd op 1 oktober van het nieuwe startende bouwjaar. 
+        Aan de hand van de opgegeven geboortedatums wordt bepaald welk persoon contributie dient te betalen van €25,- per jaar.
+        Of er contributie betaald moet worden is afhankelijk van de leeftijd op 1 oktober van dat jaar. 
         Als het lid dan 16 jaar of ouder is, geldt de contributieplicht.
       </p>
 
@@ -149,6 +149,8 @@
         div.className = 'gezinslid';
         div.innerHTML = `
           <h3>Gezinslid ${i}</h3>
+          <label>Volledige naam</label>
+          <input type="text" name="gezinslid_${i}_naam" required>
           <label>Geboortedatum</label>
           <input type="date" name="gezinslid_${i}_geboortedatum" required>
           <label>Telefoonnummer (optioneel)</label>
