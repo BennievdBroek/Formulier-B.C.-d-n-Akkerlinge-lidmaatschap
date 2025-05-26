@@ -73,25 +73,39 @@
       border-radius: 10px;
       margin-top: 15px;
     }
+    #beveiliging {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: white;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
   </style>
 </head>
 <body>
-  <script>
-    const wachtwoord = prompt("Voer het wachtwoord in:");
-    if (wachtwoord !== "akkerlinge2025") {
-      alert("Verkeerd wachtwoord. Toegang geweigerd.");
-      document.body.innerHTML = "";
-    }
-  </script>
 
-  <div class="container">
+  <!-- Beveiligingsoverlay -->
+  <div id="beveiliging">
+    <p>Voer het wachtwoord in om toegang te krijgen:</p>
+    <input type="password" id="wachtwoord" placeholder="Wachtwoord" />
+    <button onclick="controleerWachtwoord()">Doorgaan</button>
+    <p id="foutmelding" style="color:red;"></p>
+  </div>
+
+  <!-- Verborgen formulier -->
+  <div class="container" style="display:none;" id="formulier">
     <div class="logo">
       <img src="logo.png" alt="Logo B.C. d’n Akkerlinge">
     </div>
     <h1>Aanmeldformulier</h1>
 
     <form action="https://formspree.io/f/xldbypvl" method="POST">
-      <input type="hidden" name="_autoresponse" value="Bedankt voor je aanmelding bij B.C. d’n Akkerlinge! We hebben je gegevens goed ontvangen. Hieronder vind je een kopie van je aanmelding.">
+      <input type="hidden" name="_autoresponse" value="Bedankt voor je aanmelding bij B.C. d’n Akkerlinge! We hebben je gegevens goed ontvangen.">
       <input type="hidden" name="_template" value="table">
 
       <label>Volledige naam</label>
@@ -140,6 +154,16 @@
   </div>
 
   <script>
+    function controleerWachtwoord() {
+      const input = document.getElementById("wachtwoord").value;
+      if (input === "akkerlinge2025") {
+        document.getElementById("beveiliging").style.display = "none";
+        document.getElementById("formulier").style.display = "block";
+      } else {
+        document.getElementById("foutmelding").innerText = "Verkeerd wachtwoord.";
+      }
+    }
+
     document.getElementById('aantalGezinsleden').addEventListener('input', function() {
       const container = document.getElementById('gezinsleden-container');
       container.innerHTML = '';
