@@ -87,9 +87,8 @@
     }
   </style>
 </head>
-<body>
+<body onload="document.getElementById('formulier').style.display='none';">
 
-  <!-- Beveiligingsoverlay -->
   <div id="beveiliging">
     <p>Voer het wachtwoord in om toegang te krijgen:</p>
     <input type="password" id="wachtwoord" placeholder="Wachtwoord" />
@@ -97,8 +96,7 @@
     <p id="foutmelding" style="color:red;"></p>
   </div>
 
-  <!-- Verborgen formulier -->
-  <div class="container" style="display:none;" id="formulier">
+  <div class="container" id="formulier">
     <div class="logo">
       <img src="logo.png" alt="Logo B.C. d’n Akkerlinge">
     </div>
@@ -159,32 +157,33 @@
       if (input === "akkerlinge2025") {
         document.getElementById("beveiliging").style.display = "none";
         document.getElementById("formulier").style.display = "block";
+
+        document.getElementById('aantalGezinsleden').addEventListener('input', function() {
+          const container = document.getElementById('gezinsleden-container');
+          container.innerHTML = '';
+          const aantal = parseInt(this.value);
+          for (let i = 1; i <= aantal; i++) {
+            const div = document.createElement('div');
+            div.className = 'gezinslid';
+            div.innerHTML = `
+              <h3>Gezinslid ${i}</h3>
+              <label>Volledige naam</label>
+              <input type="text" name="gezinslid_${i}_naam" required>
+              <label>Geboortedatum</label>
+              <input type="date" name="gezinslid_${i}_geboortedatum" required>
+              <label>Telefoonnummer (optioneel)</label>
+              <input type="tel" name="gezinslid_${i}_telefoon">
+              <label>E-mailadres (optioneel)</label>
+              <input type="email" name="gezinslid_${i}_email">
+            `;
+            container.appendChild(div);
+          }
+        });
       } else {
         document.getElementById("foutmelding").innerText = "Verkeerd wachtwoord.";
+        document.getElementById("formulier").style.display = "none";
       }
     }
-
-    document.getElementById('aantalGezinsleden').addEventListener('input', function() {
-      const container = document.getElementById('gezinsleden-container');
-      container.innerHTML = '';
-      const aantal = parseInt(this.value);
-      for (let i = 1; i <= aantal; i++) {
-        const div = document.createElement('div');
-        div.className = 'gezinslid';
-        div.innerHTML = `
-          <h3>Gezinslid ${i}</h3>
-          <label>Volledige naam</label>
-          <input type="text" name="gezinslid_${i}_naam" required>
-          <label>Geboortedatum</label>
-          <input type="date" name="gezinslid_${i}_geboortedatum" required>
-          <label>Telefoonnummer (optioneel)</label>
-          <input type="tel" name="gezinslid_${i}_telefoon">
-          <label>E-mailadres (optioneel)</label>
-          <input type="email" name="gezinslid_${i}_email">
-        `;
-        container.appendChild(div);
-      }
-    });
   </script>
 </body>
 </html>
